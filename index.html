@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loja e Kujtesës</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+  <!-- KONTEJNERI KRYESOR (DY KOLONA) -->
+  <div class="main-container">
+    
+    <!-- PANELI I MAJTË (Njoftime & Udhëzime) -->
+    <aside class="sidebar">
+      <h3>📢 Njoftime</h3>
+      <div class="njoftim">
+        <p><strong>Mirësevini!</strong> Loja juaj e kujtesës është gati. Kyçuni për të ruajtur rekordet tuaja!</p>
+      </div>
+      <div class="njoftim" style="background: rgba(255, 209, 102, 0.2); border-left-color: #ffd166;">
+        <p><strong>Këshillë:</strong> Përqendrohuni te pozicionet e kartave. Mos u nxitoni!</p>
+      </div>
+
+      <h3 style="margin-top: 30px;">📖 Si luhet?</h3>
+      <ul style="padding-left: 20px; line-height: 1.6; font-size: 14px; color: #eee;">
+        <li>Klikoni një kartë për ta kthyer.</li>
+        <li>Gjeni çiftin e njëjtë të simboleve.</li>
+        <li>Nëse gaboni, kartat kthehen mbrapsht.</li>
+        <li>Qëllimi: Të gjeni të 8 çiftet me sa më pak lëvizje dhe në sa më pak kohë!</li>
+      </ul>
+
+      <h3 style="margin-top: 30px;">🏅 Arritjet</h3>
+      <div class="arritje" id="arr-1">
+        <span>🥇</span> Lojtar i Ri (Luaj 1 herë)
+      </div>
+      <div class="arritje" id="arr-2">
+        <span>⚡</span> I Shpejtë (Mbaro nën 30s)
+      </div>
+      <div class="arritje" id="arr-3">
+        <span>🧠</span> Mendje e Mprehtë (Mbaro me < 15 lëvizje)
+      </div>
+    </aside>
+
+    <!-- PJESA E DJATHTË (Loja & Login) -->
+    <main class="zona-lojes-kryesore">
+      
+      <h1>🧠 Loja e Kujtesës</h1>
+
+      <!-- ZONA E AUTENTIKIMIT -->
+      <div id="zona-auth" style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; margin-bottom: 20px; width: 100%; max-width: 400px; display: block; margin: 0 auto 20px auto;">
+        <h3 id="auth-titulli" style="margin-bottom: 15px; text-align: center;">Regjistrohu për të luajtur</h3>
+        
+        <input type="email" id="email" placeholder="Email" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 6px; border: none;">
+        <input type="password" id="password" placeholder="Fjalëkalimi" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 6px; border: none;">
+        <input type="text" id="username" placeholder="Emri i lojtarit" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 6px; border: none; display: block;">
+        
+        <button id="btn-auth" style="width: 100%; padding: 10px; background: #4CAF50; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">Regjistrohu</button>
+        <p id="auth-mesazhi" style="margin-top: 10px; font-size: 14px; text-align: center; color: white;"></p>
+        <p style="text-align: center; margin-top: 10px; font-size: 14px;">
+          <a href="#" id="toggle-auth" style="color: #ffd166; text-decoration: underline;">Ke llogari? Kyçu këtu.</a>
+        </p>
+      </div>
+
+      <!-- ZONA E LOJËS (Fshihet fillimisht) -->
+      <div id="zona-lojes" style="display: none; flex-direction: column; align-items: center; width: 100%;">
+        
+        <div class="info" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; align-items: center; background: rgba(255,255,255,0.15); padding: 15px 20px; border-radius: 12px; margin-bottom: 20px; width: 100%; max-width: 480px;">
+          <p style="margin: 0;">Lëvizjet: <span id="levizjet">0</span></p>
+          <p style="margin: 0;">Koha: <span id="koha">0</span>s</p>
+          <p style="margin: 0;">Çiftet: <span id="ciftet">0</span> / 8</p>
+          <button id="btn-rifillo" style="background: #ffd166; color: #333; border: none; padding: 8px 18px; border-radius: 8px; font-weight: bold; cursor: pointer;">Rifillo</button>
+          <button id="btn-dil" style="background: #e74c3c; color: white; border-radius: 8px; padding: 8px 18px; border: none; font-weight: bold; cursor: pointer;">Dil</button>
+        </div>
+
+        <!-- STATISTIKAT -->
+        <div id="zona-statistikave" style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 12px; margin-bottom: 20px; width: 100%; max-width: 480px; display: flex; justify-content: space-around; text-align: center;">
+          <div>
+            <h4 style="margin: 0; font-size: 14px; color: #ddd;">Lojërat</h4>
+            <p id="stat-lojerat" style="margin: 5px 0 0 0; font-size: 20px; font-weight: bold;">0</p>
+          </div>
+          <div>
+            <h4 style="margin: 0; font-size: 14px; color: #ddd;">Rekordi</h4>
+            <p id="stat-rekordi" style="margin: 5px 0 0 0; font-size: 20px; font-weight: bold;">-</p>
+          </div>
+          <div>
+            <h4 style="margin: 0; font-size: 14px; color: #ddd;">Mesatarja</h4>
+            <p id="stat-mesatarja" style="margin: 5px 0 0 0; font-size: 20px; font-weight: bold;">-</p>
+          </div>
+        </div>
+
+        <!-- KARTAT -->
+        <div id="loja" class="rrjeta"></div>
+
+        <!-- RENDITJA -->
+        <div id="zona-renditjes" style="margin-top: 30px; width: 100%; max-width: 480px; background: rgba(255,255,255,0.15); padding: 20px; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+          <h2 style="text-align: center; margin-bottom: 10px; font-size: 20px;">🏆 Top 5 Lojtarët</h2>
+          <ol id="lista-renditjes" style="padding-left: 25px; line-height: 1.8; font-size: 16px;">
+            <li>Duke ngarkuar...</li>
+          </ol>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
+</body>
+</html>
